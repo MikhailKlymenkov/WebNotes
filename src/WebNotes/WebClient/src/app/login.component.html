@@ -1,0 +1,29 @@
+<div>
+  <header>
+    <h1>WebNotes</h1>
+  </header>
+  <div class="login-container">
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="submit()" class="login-form">
+      <h1 class="form-title">Login</h1>
+      <div class="input-container">
+        <input [ngClass]="{'error-input': isUsernameInvalid}"
+               type="text" placeholder="Username" formControlName="{{usernameControlName}}">
+        <div class="error-label" *ngIf="isUsernameInvalid">
+          Invalid username
+        </div>
+      </div>
+      <div class="input-container">
+        <input [ngClass]="{'error-input': isPasswordInvalid || isIncorrectUsernameOrPassword}"
+               type="password" placeholder="Password" formControlName="{{passwordControlName}}">
+        <div class="error-label" *ngIf="isPasswordInvalid">
+          Invalid password
+        </div>
+        <div class="error-label" *ngIf="isIncorrectUsernameOrPassword">
+          Incorrect username or password
+        </div>
+      </div>
+      <a routerLink="/register">Register</a>
+      <button [disabled]="isLoginInProgress" [ngClass]="{'disabled-button': isLoginInProgress}">Login</button>
+    </form>
+  </div>
+</div>

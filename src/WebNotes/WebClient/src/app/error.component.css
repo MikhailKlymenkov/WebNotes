@@ -1,0 +1,15 @@
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#errorMessage {
+  margin: 30px 0px;
+  text-align: center;
+}
+
+#backButton {
+  width: 20%;
+}

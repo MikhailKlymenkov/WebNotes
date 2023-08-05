@@ -1,0 +1,36 @@
+<div>
+  <header>
+    <h1>WebNotes</h1>
+  </header>
+  <div class="login-container">
+    <form [formGroup]="registerForm" novalidate (ngSubmit)="submit()" class="login-form">
+      <h1 class="form-title">Register</h1>
+      <div class="input-container">
+        <input [ngClass]="{'error-input': isUsernameInvalid || isUserExists}"
+               type="text" placeholder="Username" formControlName="{{usernameControlName}}">
+        <div class="error-label" *ngIf="isUsernameInvalid">
+          Invalid username
+        </div>
+        <div class="error-label" *ngIf="isUserExists">
+          User already exists
+        </div>
+      </div>
+      <div class="input-container">
+        <input [ngClass]="{'error-input': isPasswordInvalid}"
+               type="password" placeholder="Password" formControlName="{{passwordControlName}}">
+        <div class="error-label" *ngIf="isPasswordInvalid">
+          Invalid password
+        </div>
+      </div>
+      <div class="input-container">
+        <input [ngClass]="{'error-input': arePasswordsNotMatch && !isPasswordInvalid}"
+               type="password" placeholder="Repeat password" formControlName="{{repeatPasswordControlName}}">
+        <div class="error-label" *ngIf="arePasswordsNotMatch && !isPasswordInvalid">
+          Password mismatch
+        </div>
+      </div>
+      <a routerLink="/login">Login</a>
+      <button [disabled]="isRegisterInProgress" [ngClass]="{'disabled-button': isRegisterInProgress}">Register</button>
+    </form>
+  </div>
+</div>
