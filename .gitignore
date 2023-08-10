@@ -431,4 +431,4 @@ testem.log
 Thumbs.db
 
 #Database
-.db
+*.db

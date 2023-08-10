@@ -18,6 +18,7 @@ import { AppHttpInterceptor } from './app-http-interceptor';
 
 import { LocalStorageService } from './services/local-storage.service';
 import { AuthService } from './services/api/auth.service';
+import { SettingsDropdownComponent } from './settings-dropdown.component';
 
 const appRoutes: Routes = [
   { path: '', component: NoteListComponent, canActivate: [authorizationGuard] },
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     NoteListComponent,
     ErrorComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SettingsDropdownComponent
   ],
   imports: [
     BrowserModule,
