@@ -30,7 +30,7 @@ namespace API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody] UserDTO userDTO)
+        public async Task<IActionResult> Login([FromBody] UserDto userDTO)
         {
             var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == userDTO.Username);
             if (user == null || user.Password != _cryptographyService.GetSha256Hash(userDTO.Password))
@@ -47,7 +47,7 @@ namespace API.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
+        public async Task<IActionResult> Register([FromBody] UserDto userDTO)
         {
             var existingUser = await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == userDTO.Username);
             if (existingUser != null)

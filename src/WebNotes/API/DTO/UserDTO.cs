@@ -2,7 +2,7 @@
 
 namespace API.DTO;
 
-public class UserDTO
+public class UserDto
 {
     [Required(AllowEmptyStrings = false)]
     [StringLength(30, MinimumLength = 4)]

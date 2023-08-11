@@ -13,5 +13,5 @@ public class User
 
     public string Role { get; set; }
 
-    public IEnumerable<Note>? Notes { get; set; }
+    public ICollection<Note> Notes { get; set; }
 }
