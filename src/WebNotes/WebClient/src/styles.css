@@ -103,7 +103,7 @@ input[type="password"] {
   flex-direction: column;
 }
 
-.login-form .input-container .error-input {
+.input-container .error-input {
   border: 1px solid red;
   margin: 0 0 5px 0;
 }

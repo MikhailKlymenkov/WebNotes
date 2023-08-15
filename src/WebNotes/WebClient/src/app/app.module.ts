@@ -19,6 +19,7 @@ import { AppHttpInterceptor } from './app-http-interceptor';
 import { LocalStorageService } from './services/local-storage.service';
 import { AuthService } from './services/api/auth.service';
 import { SettingsDropdownComponent } from './settings-dropdown.component';
+import { NotesService } from './services/api/notes.service';
 
 const appRoutes: Routes = [
   { path: '', component: NoteListComponent, canActivate: [authorizationGuard] },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   providers: [
     LocalStorageService,
     AuthService,
+    NotesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,

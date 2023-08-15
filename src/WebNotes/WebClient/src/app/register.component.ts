@@ -5,6 +5,7 @@ import { AuthService } from './services/api/auth.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { Router } from '@angular/router';
 import { LocalStorageKeys } from './local-storage-keys';
+import { UserDto } from './dto/user.dto';
 
 @Component({
   selector: 'register',
@@ -72,7 +73,8 @@ export class RegisterComponent implements OnInit {
     const password = this.registerForm.controls[this.passwordControlName].value;
 
     this.isRegisterInProgress = true;
-    this.authService.register(username, password).subscribe({
+    const userDTO: UserDto = { username, password };
+    this.authService.register(userDTO).subscribe({
       next: (response) => {
         this.isRegisterInProgress = false;
         this.localStorageService.set(LocalStorageKeys.JWT_TOKEN_KEY, response.jwtToken);

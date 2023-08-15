@@ -33,7 +33,7 @@ namespace API.Controllers
             {
                 id = x.Id,
                 title = x.Title,
-                creationDate = x.CreationDate
+                creationDate = DateTime.SpecifyKind(x.CreationDate, DateTimeKind.Utc)
             });
 
             return Ok(notes);
@@ -58,8 +58,8 @@ namespace API.Controllers
             {
                 id = note.Id,
                 title = note.Title,
-                creationDate = note.CreationDate,
                 body = note.Body,
+                creationDate = DateTime.SpecifyKind(note.CreationDate, DateTimeKind.Utc),
                 isEdited = note.IsEdited
             });
         }
@@ -84,7 +84,14 @@ namespace API.Controllers
             user.Notes.Add(note);
             await _dbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new
+            {
+                id = note.Id,
+                title = note.Title,
+                body = note.Body,
+                creationDate = DateTime.SpecifyKind(note.CreationDate, DateTimeKind.Utc),
+                isEdited = note.IsEdited
+            });
         }
 
         [HttpPut("{id}")]
@@ -96,7 +103,7 @@ namespace API.Controllers
                 return UserNotFound();
             }
 
-            var note = user.Notes?.FirstOrDefault(x => x.Id == id);
+            var note = user.Notes.FirstOrDefault(x => x.Id == id);
             if (note == null)
             {
                 return NoteNotFound(id);
@@ -108,7 +115,14 @@ namespace API.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new
+            {
+                id = note.Id,
+                title = note.Title,
+                body = note.Body,
+                creationDate = DateTime.SpecifyKind(note.CreationDate, DateTimeKind.Utc),
+                isEdited = note.IsEdited
+            });
         }
 
         [HttpDelete("{id}")]
@@ -120,7 +134,7 @@ namespace API.Controllers
                 return UserNotFound();
             }
 
-            var note = user.Notes?.FirstOrDefault(x => x.Id == id);
+            var note = user.Notes.FirstOrDefault(x => x.Id == id);
             if (note == null)
             {
                 return NoteNotFound(id);
@@ -135,7 +149,7 @@ namespace API.Controllers
         private async Task<User?> GetUser()
         {
             var username = GetUsername();
-            return await _dbContext.Users.FirstOrDefaultAsync(x => x.Username == username);
+            return await _dbContext.Users.Include(u => u.Notes).FirstOrDefaultAsync(x => x.Username == username);
         }
 
         private string GetUsername()

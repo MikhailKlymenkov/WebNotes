@@ -4,4 +4,6 @@ export class Endpoints {
   public static LOGIN = "/Authentication/Login";
 
   public static REGISTER = "/Authentication/Register";
+
+  public static NOTES = "/Notes";
 }

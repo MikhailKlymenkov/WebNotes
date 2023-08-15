@@ -5,6 +5,7 @@ import { AuthService } from './services/api/auth.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { LocalStorageKeys } from './local-storage-keys';
 import { Router } from '@angular/router';
+import { UserDto } from './dto/user.dto';
 
 @Component({
   selector: 'login',
@@ -62,7 +63,8 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.controls[this.passwordControlName].value;
 
     this.isLoginInProgress = true;
-    this.authService.login(username, password).subscribe({
+    const userDTO: UserDto = { username, password };
+    this.authService.login(userDTO).subscribe({
       next: (response) => {
         this.isLoginInProgress = false;
         this.localStorageService.set(LocalStorageKeys.JWT_TOKEN_KEY, response.jwtToken);

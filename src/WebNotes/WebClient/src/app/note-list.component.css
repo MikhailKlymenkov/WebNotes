@@ -3,6 +3,14 @@ textarea {
   font-size: 16px;
 }
 
+input[type="text"] {
+  font-size: 16px;
+}
+
+.input-container .error-input {
+  margin: 0 0 10px 0;
+}
+
 .root-container {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -35,17 +43,38 @@ textarea {
 
 .editor {
   width: 100%;
-  height: 80vh;
+  height: calc(100% - 160px);
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
+.editor-date {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.editor-control-panel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+}
+
+.editor-preloader {
+  margin-top: 28px;
+  grid-row: 1;
+  grid-column: 1;
+  color: #888;
+  font-size: 14px;
+}
+
 .editor-buttons {
+  margin-top: 20px;
+  grid-row: 1;
+  grid-column: 1 / span 2;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .round-button {
@@ -110,6 +139,10 @@ textarea {
   transform: scale(1.01);
 }
 
+.note-item-selected {
+  background: #c5c1c1;
+}
+
 .note-text {
   padding-right: 25px;
   display: inline-block;
@@ -121,6 +154,25 @@ textarea {
 
 .note-icon {
   margin-right: 10px;
+}
+
+.preloader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.preloader i {
+  font-size: 36px;
+  color: #888;
+  margin-right: 5px;
+}
+
+.preloader span {
+  font-size: 14px;
+  color: #888;
 }
 
 .burger-menu-icon {
