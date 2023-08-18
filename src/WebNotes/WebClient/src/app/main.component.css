@@ -1,0 +1,145 @@
+textarea {
+  resize: none;
+  font-size: 16px;
+}
+
+input[type="text"] {
+  font-size: 16px;
+}
+
+.input-container .error-input {
+  margin: 0 0 10px 0;
+}
+
+.root-container {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.body-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4fr;
+  overflow: hidden;
+}
+
+.notes-column {
+  border-right: 1px solid #ccc;
+  background: #f3f3f3;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.editor-column {
+  padding: 20px 40px;
+}
+
+.editor-disabled {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.editor {
+  width: 100%;
+  height: calc(100% - 160px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.editor-date {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.editor-control-panel {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+}
+
+.editor-preloader {
+  margin-top: 28px;
+  grid-row: 1;
+  grid-column: 1;
+  color: #888;
+  font-size: 14px;
+}
+
+.editor-buttons {
+  margin-top: 20px;
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  display: flex;
+  justify-content: center;
+}
+
+.round-button {
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.round-button-container {
+  margin-right: 20px;
+}
+
+.delete-button {
+  background: #c50404;
+}
+
+.delete-button:hover {
+  background: #eb6262;
+}
+
+.new-note-button {
+  margin: 15px 0;
+  padding: 8px 12px;
+  background-color: transparent;
+  color: black;
+  border: 1px solid #ccc;
+  width: 60%;
+}
+
+.new-note-button:hover {
+  background-color: #e1e1e1;
+}
+
+.new-note-button-container {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f3f3;
+}
+
+.burger-menu-icon {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .notes-column {
+    display: none;
+  }
+
+  .body-container {
+    grid-template-columns: 1fr;
+  }
+
+  .burger-menu-icon {
+    display: block;
+  }
+}

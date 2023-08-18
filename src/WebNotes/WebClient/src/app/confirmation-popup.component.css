@@ -1,0 +1,33 @@
+:root {
+  --common-font: Comic Sans MS;
+}
+
+.title {
+  font-family: var(--common-font), sans-serif;
+  color: black;
+}
+
+.content {
+  font-family: var(--common-font), sans-serif;
+  color: black;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+
+.confirm-button {
+  background-color: #153961;
+  margin: 0;
+}
+
+.confirm-button:hover {
+  background-color: #29588d;
+}
+
+.cancel-button {
+  margin: 0;
+}

@@ -87,8 +87,6 @@ namespace API.Controllers
             return Ok(new
             {
                 id = note.Id,
-                title = note.Title,
-                body = note.Body,
                 creationDate = DateTime.SpecifyKind(note.CreationDate, DateTimeKind.Utc),
                 isEdited = note.IsEdited
             });
@@ -118,8 +116,6 @@ namespace API.Controllers
             return Ok(new
             {
                 id = note.Id,
-                title = note.Title,
-                body = note.Body,
                 creationDate = DateTime.SpecifyKind(note.CreationDate, DateTimeKind.Utc),
                 isEdited = note.IsEdited
             });

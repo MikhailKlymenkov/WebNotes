@@ -1,70 +1,15 @@
-<div class="root-container">
-  <header>
-    <div class="burger-menu-icon">
-      <i class="material-icons">menu</i>
-    </div>
-    <h1>WebNotes</h1>
-    <div class="settings-icon" (click)="settingsDropdown.toggleDropdown()">
-      <i class="material-icons">settings</i>
-    </div>
-    <settings-dropdown #settingsDropdown></settings-dropdown>
-  </header>
-
-  <div class="body-container">
-    <div class="notes-column">
-      <div class="new-note-button-container">
-        <button class="new-note-button" (click)="onNewNoteClick()">New note</button>
-      </div>
-      <div class="note-list">
-        <div *ngIf="listLoading; else notesList">
-          <div class="preloader">
-            <i class="material-icons">hourglass_empty</i>
-            <span>Loading...</span>
-          </div>
-        </div>
-        <ng-template #notesList>
-          <div *ngFor="let note of notes" class="note-item" (click)="onNoteClick(note)"
-             [ngClass]="{'note-item-selected': note.isSelected}">
-            <i class="material-icons note-icon">note</i>
-            <span class="note-text">{{ note.title }}</span>
-          </div>
-        </ng-template>        
-      </div>
-    </div>
-    <div class="editor-column">
-      <div *ngIf="currentNote.creationDate" class="editor-date">
-        {{ currentNote.creationDate.toLocaleString() }}
-        <span *ngIf="currentNote.isEdited">(edited)</span>
-      </div>
-      <div class="input-container">
-        <input [ngClass]="{'error-input': titleInvalid}"
-               type="text" class="title-input" placeholder="Enter title"
-               [(ngModel)]="currentNote.title" (input)="onTitleInput()">
-      </div>
-      <textarea class="editor" [(ngModel)]="currentNote.body"></textarea>
-      <div class="editor-control-panel">
-        <div class="editor-preloader">{{ editorState }}</div>
-        <div class="editor-buttons">
-          <div class="tooltip round-button-container">
-            <button class="round-button" (click)="onSaveClick()">
-              <i class="material-icons">save</i>
-            </button>
-            <span class="tooltiptext">Save</span>
-          </div>
-          <div class="tooltip round-button-container">
-            <button class="round-button" (click)="onClearClick()">
-              <i class="material-icons">close</i>
-            </button>
-            <span class="tooltiptext">Clear text</span>
-          </div>
-          <div class="tooltip">
-            <button class="round-button delete-button" (click)="onDeleteClick()">
-              <i class="material-icons">delete</i>
-            </button>
-            <span class="tooltiptext">Delete</span>
-          </div>
-        </div>
-      </div>
+<div class="note-list">
+  <div *ngIf="notes === undefined; else notesList">
+    <div class="preloader">
+      <i class="material-icons">hourglass_empty</i>
+      <span>Loading...</span>
     </div>
   </div>
+  <ng-template #notesList>
+    <div *ngFor="let note of notes" class="note-item" (click)="noteClicked.emit(note)"
+         [ngClass]="{'note-item-selected': note === selectedItem}">
+      <i class="material-icons note-icon">note</i>
+      <span class="note-text">{{ note.title }}</span>
+    </div>
+  </ng-template>
 </div>

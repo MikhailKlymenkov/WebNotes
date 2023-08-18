@@ -1,0 +1,62 @@
+<div class="root-container">
+  <header>
+    <div class="burger-menu-icon">
+      <i class="material-icons">menu</i>
+    </div>
+    <h1>WebNotes</h1>
+    <div class="settings-icon" (click)="settingsDropdown.toggleDropdown()">
+      <i class="material-icons">settings</i>
+    </div>
+    <settings-dropdown #settingsDropdown></settings-dropdown>
+  </header>
+
+  <div class="body-container">
+    <div class="notes-column">
+      <div class="new-note-button-container">
+        <button class="new-note-button" (click)="onNewNoteClick()"
+                [disabled]="editorState !== '' || noteList.notes === undefined">New note</button>
+      </div>
+      <note-list (noteClicked)="onNoteClick($event)" #noteList></note-list>
+    </div>
+    <div class="editor-column" [ngClass]="{'editor-disabled': editorState !== '' || noteList.notes === undefined}">
+      <div *ngIf="currentNote.creationDate" class="editor-date">
+        {{ currentNote.creationDate.toLocaleString() }}
+        <span *ngIf="currentNote.isEdited">(edited)</span>
+      </div>
+      <div class="input-container">
+        <input [ngClass]="{'error-input': titleInvalid}"
+               type="text" class="title-input" placeholder="Enter title"
+               [(ngModel)]="currentNote.title" (input)="onTitleInput()"
+               [disabled]="editorState !== '' || noteList.notes === undefined">
+      </div>
+      <textarea class="editor" [(ngModel)]="currentNote.body"
+                [disabled]="editorState !== '' || noteList.selectedItem === undefined"></textarea>
+      <div class="editor-control-panel">
+        <div class="editor-preloader">{{ editorState }}</div>
+        <div class="editor-buttons">
+          <div class="tooltip round-button-container">
+            <button class="round-button" (click)="onSaveClick()"
+                    [disabled]="editorState !== '' || noteList.selectedItem === undefined">
+              <i class="material-icons">save</i>
+            </button>
+            <span class="tooltiptext">Save</span>
+          </div>
+          <div class="tooltip round-button-container">
+            <button class="round-button" (click)="onClearClick()"
+                    [disabled]="editorState !== '' || noteList.selectedItem === undefined">
+              <i class="material-icons">close</i>
+            </button>
+            <span class="tooltiptext">Clear text</span>
+          </div>
+          <div class="tooltip">
+            <button class="round-button delete-button" (click)="onDeleteClick()"
+                    [disabled]="editorState !== '' || noteList.selectedItem === undefined">
+              <i class="material-icons">delete</i>
+            </button>
+            <span class="tooltiptext">Delete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
