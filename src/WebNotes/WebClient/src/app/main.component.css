@@ -35,7 +35,7 @@ input[type="text"] {
   padding: 20px 40px;
 }
 
-.editor-disabled {
+.editor-column-disabled {
   opacity: 0.7;
   pointer-events: none;
 }
@@ -132,14 +132,40 @@ input[type="text"] {
 
 @media (max-width: 768px) {
   .notes-column {
-    display: none;
+    z-index: 1;
+    width: 0;
+    border-right: 0;
+    grid-column: 1;
+    grid-row: 1;
+    transition: width 0.3s ease-in-out;
   }
 
   .body-container {
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
   }
 
   .burger-menu-icon {
     display: block;
+  }
+
+  .editor-column {
+    z-index: 0;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .new-note-button {
+    min-width: 100px;
+  }
+
+  .notes-column-visible-mobile {
+    width: 80% !important;
+    border-right: 1px solid #ccc !important;
+  }
+
+  .editor-column-disabled-mobile {
+    opacity: 0.5;
+    pointer-events: none;
   }
 }

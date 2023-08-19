@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -11,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 export class ErrorComponent {
   errorMessage: string;
 
-  constructor(private router: Router, private location: Location, private titleService: Title) {
+  constructor(private router: Router, private titleService: Title) {
     this.titleService.setTitle("Error");
 
     let errorCode = this.router.getCurrentNavigation()?.extras.state?.['errorCode'];
@@ -32,7 +31,7 @@ export class ErrorComponent {
     }
   }
 
-  onBack() {
-    this.location.back();
+  onGoHome() {
+    this.router.navigate(['']);
   }
 }

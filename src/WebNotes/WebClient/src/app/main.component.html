@@ -1,6 +1,6 @@
 <div class="root-container">
   <header>
-    <div class="burger-menu-icon">
+    <div class="burger-menu-icon" (click)="toggleNotesColumn()">
       <i class="material-icons">menu</i>
     </div>
     <h1>WebNotes</h1>
@@ -11,14 +11,15 @@
   </header>
 
   <div class="body-container">
-    <div class="notes-column">
+    <div class="notes-column" [ngClass]="{ 'notes-column-visible-mobile': isNotesColumnVisible }">
       <div class="new-note-button-container">
         <button class="new-note-button" (click)="onNewNoteClick()"
                 [disabled]="editorState !== '' || noteList.notes === undefined">New note</button>
       </div>
       <note-list (noteClicked)="onNoteClick($event)" #noteList></note-list>
     </div>
-    <div class="editor-column" [ngClass]="{'editor-disabled': editorState !== '' || noteList.notes === undefined}">
+    <div class="editor-column" [ngClass]="{'editor-column-disabled': editorState !== '' || noteList.notes === undefined,
+                                           'editor-column-disabled-mobile': isNotesColumnVisible}">
       <div *ngIf="currentNote.creationDate" class="editor-date">
         {{ currentNote.creationDate.toLocaleString() }}
         <span *ngIf="currentNote.isEdited">(edited)</span>

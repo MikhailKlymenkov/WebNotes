@@ -22,6 +22,7 @@ export class MainComponent {
   currentNote: Note = { id: 0, title: '', body: '', creationDate: undefined, isEdited: false };
   titleInvalid: boolean = false;
   editorState: string = '';
+  isNotesColumnVisible = false;
 
   constructor(private notesService: NotesService, private dialog: MatDialog) { }
 
@@ -34,6 +35,7 @@ export class MainComponent {
       return;
     }
 
+    this.isNotesColumnVisible = false;
     this.currentNote = {
       id: note.id,
       title: note.title,
@@ -74,6 +76,7 @@ export class MainComponent {
       return;
     }
 
+    this.isNotesColumnVisible = false;
     this.currentNote = { id: 0, title: 'New note', body: '', creationDate: undefined, isEdited: false };
     this.noteListComponent.addNewNote(this.currentNote.title);
   }
@@ -135,6 +138,10 @@ export class MainComponent {
         }
       }
     });
+  }
+
+  toggleNotesColumn() {
+    this.isNotesColumnVisible = !this.isNotesColumnVisible;
   }
 
   private tryUnselectNoteListItem(): boolean {
