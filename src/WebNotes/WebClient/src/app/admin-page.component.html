@@ -1,0 +1,25 @@
+<div class="container">
+  <a (click)="signOut()">Sign Out</a>
+  <h2>Statistics</h2>
+  <div class="preloader" *ngIf="isLoading">
+    Loading...
+  </div>
+  <div class="table-container" *ngIf="!isLoading">
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Notes Count</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accounts">
+          <td>{{ account.user }}</td>
+          <td>{{ account.notesCount }}</td>
+          <td><button (click)="deleteAccount(account.user)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

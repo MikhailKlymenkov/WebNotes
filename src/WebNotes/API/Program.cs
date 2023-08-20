@@ -32,6 +32,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 builder.Services.AddAuthorization();
+// TODO: Use MS SQL Server.
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(databaseSettings.ConnectionString));
 
 var app = builder.Build();

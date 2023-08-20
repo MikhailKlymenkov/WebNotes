@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 import { AuthService } from './services/api/auth.service';
-import { LocalStorageService } from './services/local-storage.service';
-import { Router } from '@angular/router';
-import { LocalStorageKeys } from './local-storage-keys';
 import { UserDto } from './dto/user.dto';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'register',
@@ -31,8 +29,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private titleService: Title,
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
-    private router: Router)
+    private navigationService: NavigationService)
   {
     this.titleService.setTitle("Register");
   }
@@ -77,8 +74,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(userDTO).subscribe({
       next: (response) => {
         this.isRegisterInProgress = false;
-        this.localStorageService.set(LocalStorageKeys.JWT_TOKEN_KEY, response.jwtToken);
-        this.router.navigate(['']);
+        this.navigationService.signIn(response.jwtToken, response.role);
       },
       error: () => {
         this.isUserExists = true;

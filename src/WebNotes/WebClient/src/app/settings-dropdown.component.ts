@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { LocalStorageService } from './services/local-storage.service';
-import { Router } from '@angular/router';
-import { LocalStorageKeys } from './local-storage-keys';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'settings-dropdown',
@@ -11,14 +9,13 @@ import { LocalStorageKeys } from './local-storage-keys';
 export class SettingsDropdownComponent {
   showDropdown = false;
 
-  constructor(private localStorageService: LocalStorageService, private router: Router) { }
+  constructor(private navigationService: NavigationService) { }
 
   toggleDropdown(): void {
     this.showDropdown = !this.showDropdown;
   }
 
   signOut(): void {
-    this.localStorageService.remove(LocalStorageKeys.JWT_TOKEN_KEY);
-    this.router.navigate(['/login']);
+    this.navigationService.signOut();
   }
 }

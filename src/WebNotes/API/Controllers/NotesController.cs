@@ -9,7 +9,7 @@ using System.Security.Claims;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [Authorize(Roles = Roles.User)]
     public class NotesController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace API.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetNotes()
         {
-            var user = await GetUser();
+            var user = await GetUserAsync();
             if (user == null)
             {
                 return UserNotFound();
@@ -42,7 +42,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetNote(int id)
         {
-            var user = await GetUser();
+            var user = await GetUserAsync();
             if (user == null)
             {
                 return UserNotFound();
@@ -67,7 +67,7 @@ namespace API.Controllers
         [HttpPost()]
         public async Task<IActionResult> AddNote([FromBody] NoteDto noteDto)
         {
-            var user = await GetUser();
+            var user = await GetUserAsync();
             if (user == null)
             {
                 return UserNotFound();
@@ -95,7 +95,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditNote(int id, [FromBody] NoteDto noteDto)
         {
-            var user = await GetUser();
+            var user = await GetUserAsync();
             if (user == null)
             {
                 return UserNotFound();
@@ -124,7 +124,7 @@ namespace API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNote(int id)
         {
-            var user = await GetUser();
+            var user = await GetUserAsync();
             if (user == null)
             {
                 return UserNotFound();
@@ -142,7 +142,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        private async Task<User?> GetUser()
+        private async Task<User?> GetUserAsync()
         {
             var username = GetUsername();
             return await _dbContext.Users.Include(u => u.Notes).FirstOrDefaultAsync(x => x.Username == username);

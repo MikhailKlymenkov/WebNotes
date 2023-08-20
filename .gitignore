@@ -398,10 +398,10 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+dist
+tmp
+out-tsc
+bazel-out
 
 # Node
 /node_modules

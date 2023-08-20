@@ -4,11 +4,15 @@ import { LocalStorageService } from './services/local-storage.service';
 import { LocalStorageKeys } from './local-storage-keys';
 import { Router } from '@angular/router';
 import { EMPTY, Observable, catchError, throwError } from 'rxjs';
+import { NavigationService } from './services/navigation.service';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
 
-  constructor(private localStorageService: LocalStorageService, private router: Router) { }
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router,
+    private navigationService: NavigationService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const jwtToken = this.localStorageService.get(LocalStorageKeys.JWT_TOKEN_KEY);
@@ -36,8 +40,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     }
 
     if (error.status === 401) {
-      this.localStorageService.remove(LocalStorageKeys.JWT_TOKEN_KEY);
-      this.router.navigate(['/login']);
+      this.navigationService.signOut();
     }
     else {
       this.router.navigate(['/error'], { state: { errorCode: error.status }, skipLocationChange: true });

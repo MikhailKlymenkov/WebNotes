@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from "@angular/platform-browser";
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from './services/api/auth.service';
-import { LocalStorageService } from './services/local-storage.service';
-import { LocalStorageKeys } from './local-storage-keys';
-import { Router } from '@angular/router';
 import { UserDto } from './dto/user.dto';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'login',
@@ -29,8 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private titleService: Title,
     private authService: AuthService,
-    private localStorageService: LocalStorageService,
-    private router: Router)
+    private navigationService: NavigationService)
   {
     this.titleService.setTitle("Login");
   }
@@ -67,8 +64,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(userDTO).subscribe({
       next: (response) => {
         this.isLoginInProgress = false;
-        this.localStorageService.set(LocalStorageKeys.JWT_TOKEN_KEY, response.jwtToken);
-        this.router.navigate(['']);
+        this.navigationService.signIn(response.jwtToken, response.role);
       },
       error: () => {
         this.isIncorrectUsernameOrPassword = true;

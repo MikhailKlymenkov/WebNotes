@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { NavigationService } from './services/navigation.service';
 
 @Component({
   selector: 'error',
@@ -10,7 +11,11 @@ import { Title } from '@angular/platform-browser';
 export class ErrorComponent {
   errorMessage: string;
 
-  constructor(private router: Router, private titleService: Title) {
+  constructor(
+    private router: Router,
+    private titleService: Title,
+    private navigationService: NavigationService)
+  {
     this.titleService.setTitle("Error");
 
     let errorCode = this.router.getCurrentNavigation()?.extras.state?.['errorCode'];
@@ -32,6 +37,6 @@ export class ErrorComponent {
   }
 
   onGoHome() {
-    this.router.navigate(['']);
+    this.navigationService.navigateToMainPage();
   }
 }
