@@ -25,7 +25,6 @@ a {
 
 table {
   width: 60vw;
-  max-width: 60vw;
 }
 
 th,
@@ -33,8 +32,16 @@ td {
   padding: 12px;
   text-align: center;
   border-bottom: 1px solid #ddd;
+  max-width: 30vw;
+  word-wrap: break-word;
 }
 
 th {
   background-color: #f2f2f2;
+}
+
+@media (max-width: 768px) {
+  table {
+    width: 90vw;
+  }
 }

@@ -1,3 +1,4 @@
+// TODO: Move to config file.
 export class Endpoints {
   public static API_URL = "http://localhost:5283/api";
 
