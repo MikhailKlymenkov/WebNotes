@@ -12,7 +12,7 @@ var authenticationSettings = builder.Configuration.GetSection(ConfigurationSecti
 var databaseSettings = builder.Configuration.GetSection(ConfigurationSections.Database).Get<DatabaseSettings>();
 
 // Add services to the container.
-builder.Services.AddTransient<ICryptographyService, CryptographyService>();
+builder.Services.AddSingleton<ICryptographyService, CryptographyService>();
 
 builder.Services.AddCors();
 builder.Services.AddControllers();
