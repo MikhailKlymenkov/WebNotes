@@ -14,6 +14,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
     private router: Router,
     private navigationService: NavigationService) { }
 
+  // TODO: Rewrite to use cookies.
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const jwtToken = this.localStorageService.get(LocalStorageKeys.JWT_TOKEN_KEY);
 

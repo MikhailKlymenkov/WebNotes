@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
+    // TODO: Rewrite to use cookies.
     [ApiController]
     [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
